@@ -7,9 +7,13 @@ const UserSchema = new mongoose.Schema({
   passwordHash:  { type: String, required: true },
 
   onboarding: {
-    status: { type: String, default: 'pending' }, // 'pending' or 'complete'
+    status: { 
+      type: String, 
+      enum: ['pending', 'completed'], // ✅ Changed 'complete' to 'completed'
+      default: 'pending' 
+    },
     answers: {
-      cleanliness:      { type: Number, min:1, max:5, default: 3 },
+      cleanliness:      { type: Number, min: 1, max: 5, default: 3 },
       sleepSchedule:    { type: String, enum: ['early', 'late', 'flexible'], default: 'flexible' },
       diet:             { type: String, enum: ['veg', 'non-veg'], default: 'veg' },
       noiseTolerance:   { type: String, enum: ['low', 'medium', 'high'], default: 'medium' },
